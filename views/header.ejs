@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>innodev</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.12.1/datatables.min.css"/>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
+</style>
+<body id="body-pd">
+    <header class="header" id="header">
+        
+        <% if(typeof isLogin !="undefined"&& isLogin){ %>
+          <div class="btan"><a href="/add-item"><button>Upload Video</button></a>
+            <a href="/logout"><button >Log Out</button></a></div>
+          <% } else{%> 
+        <div class="btan"><a href="/signup"><button>Sign Up</button></a>
+    <a href="/login"><button >Log In</button></a></div>
+             <% } %> 
+    </header>
+   
+       <%# if(typeof isLogin !="undefined"&& isLogin){ %> 
+        
+        <!-- <a href="/upload" class="nav-link">Upload video</a>
+            <a href="/logout"  class="nav-link">logout</a> -->
+            
+        <%# } else{%>  
+            <!-- <a href="/login">login</a>
+            <a href="/signup">signup</a>
+            <a href="/">home</a> -->
+            <%# } %> 

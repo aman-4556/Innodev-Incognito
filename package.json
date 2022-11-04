@@ -1,0 +1,27 @@
+{
+  "name": "innodev-incognito",
+  "version": "1.0.0",
+  "description": "help kris",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abomode/Innodev-Incognito.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abomode/Innodev-Incognito/issues"
+  },
+  "homepage": "https://github.com/abomode/Innodev-Incognito#readme",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "formidable": "^2.0.1"
+  }
+}
