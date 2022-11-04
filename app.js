@@ -4,7 +4,7 @@ var bcrypt=require('bcrypt');
 const session=require('express-session');
 var formidable=require("formidable");
 var fs=require("fs");
-var {getVideoDurationInSeconds} =require("get-video-duration");
+
 var app = express();
 app.use("/static", express.static(__dirname+"/static"));
 app.set("view engine","ejs");
