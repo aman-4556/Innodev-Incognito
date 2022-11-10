@@ -19,13 +19,6 @@ app.use(session({
 }));
 
 //a function to return user's document
-function getUser(id,callBack) {
-    database.collection("users").findOne({
-        "_id":ObjectId(id)
-    },function (error,user) {
-    callBack(user);        
-    });
-}
 
 var mongodb=require("mongodb");
 var MongoClient=mongodb.MongoClient;
@@ -36,7 +29,14 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
             var database=client.db("innodev");
             console.log("Db connected");
 
-
+            function getUser(id,callBack) {
+                database.collection("users").findOne({
+                    "_id":ObjectId(id)
+                },function (error,user) {
+                callBack(user);        
+                });
+            }
+            
             app.get('/',(req,res)=>{
                 res.render("index",{
                     isLogin:req.session.user_id? true :false
@@ -67,8 +67,8 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                                 req.session.user_id=user._id;
                                 res.redirect("/");
                             }else{
-                                // res.send("<h2>wrong password</h2>");
-                                alert("Wrong Password");
+                                res.send("<h2>wrong password</h2>");
+                                // alert("Wrong Password");
                             }
                         });
                     }
@@ -133,8 +133,8 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
 
                         var category=fields.category;
 
-                        var oldPaththumbnail=files.thumbnail.path;
-                        var newPaththumbnail= "uploads/thumbnails/"+ new Date().getTime()+"-"+files.thumbnail.name;
+                        var oldPaththumbnail=files.thumbnail.filepath;
+                        var newPaththumbnail= "uploads/thumbnails/"+ new Date().getTime()+"-"+files.thumbnail.originalFilename;
                         fs.rename(oldPaththumbnail,newPaththumbnail,(error)=>{
                             //
                             getUser(req.session.user_id,(user)=>{
@@ -144,7 +144,7 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                                     "_id":user._id,
                                     "name":user.name,
                                     "image":user.image,
-                                    "subscribers":user,subscribers
+                                    "subscribers":user.subscribers
                                 },
                                 
                                 "thumbnail":newPaththumbnail,
