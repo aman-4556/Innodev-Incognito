@@ -1,22 +1,25 @@
 <%- include("header") %>
 <h1>Add Tour Items</h1>
-    <form action="/add-item" method="post" enctype="multipart/form-data">
-         <label>Item-Image</label>
-         <input type="file" name="thumbnail" accept="image/*" class="form-control-file" required> 
-         <div>
-         <label>Title</label> 
-        <input type="text" name="title" class="form-control" required>
-        </div>
-        <label>Description</label>
-        <textarea name="description" class="form-control" cols="30" rows="5" required></textarea>
-        <label>Category</label>
-        <select name="category" class="form-control" required>
-            <option value="technology">technology</option>
-            <option value="gaming">gaming</option>
-            <option value="education">education</option>
-            <option value="funny">furniture</option>
-            </select>
-        <button type="submit">Add</button>
-    </form>
+<form action="/add-item" method="post" enctype="multipart/form-data">
+    <label>Item-Image</label>
+    <input type="file" name="thumbnail" accept="image/*" class="form-control-file" required> 
+    <div>
+    <label>Title</label> 
+   <input type="text" name="title" class="form-control" required>
+   </div>
+    <div>
+    <label>Price</label> 
+   <input type="number" name="price" class="form-control" required>
+   </div>
+   <label>Description</label>
+   <textarea name="description" class="form-control" cols="30" rows="5" required></textarea>
+   <label>Category</label>
+   <select name="category" class="form-control" required>
+       <option value="technology">Furniture</option>
+       <option value="gaming">Study material</option>
+       <option value="education">Basic Needs</option>
+       </select>
+   <button type="submit">Add</button>
+</form>
 </body>
 </html>

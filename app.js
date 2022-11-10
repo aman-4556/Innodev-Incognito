@@ -7,6 +7,7 @@ var fs=require("fs");
 
 var app = express();
 app.use("/static", express.static(__dirname+"/static"));
+app.use("/uploads", express.static(__dirname+"/uploads"));
 app.set("view engine","ejs");
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -38,9 +39,15 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
             }
             
             app.get('/',(req,res)=>{
-                res.render("index",{
-                    isLogin:req.session.user_id? true :false
-                });
+               
+                database.collection("items").find({}).sort({
+                    "createdAt":-1
+                }).toArray(function(error,items){
+                    res.render("index",{
+                        "isLogin":req.session.user_id? true :false,
+                        "videos":items
+                    });
+                });  
             });
             
 
@@ -94,7 +101,6 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                                 "email":req.body.email,
                                 "password":hash,
                                 "image":"",                         
-                                "history":[],
                                 "notifications":[]
                             },function (error,data) {
                                 res.redirect("/login");
@@ -130,7 +136,7 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                     form.parse(req,(error,fields,files)=>{
                         var title=fields.title;
                         var description=fields.description;
-
+                        var price=fields.price;
                         var category=fields.category;
 
                         var oldPaththumbnail=files.thumbnail.filepath;
@@ -144,7 +150,7 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                                     "_id":user._id,
                                     "name":user.name,
                                     "image":user.image,
-                                    "subscribers":user.subscribers
+                                    
                                 },
                                 
                                 "thumbnail":newPaththumbnail,
@@ -152,7 +158,7 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                                 "descriptions":description,
                                 "category":category,
                                 "createdAt":currentTime,
-                                "comments":[]
+                                "price":price
                             },function (error,data) {
                                 //insertin in users collection too
                                  database.collection("users").updateOne({
@@ -163,7 +169,6 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                                             "_id":data.insertedId,
                                             "title":title,
                                             "views":0,
-                                            "thumbnail":thumbnail,
                                             
                                         }
                                     }
@@ -177,6 +182,23 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                 } else {
                     res.redirect("/login");
                 }
+            });
+
+            app.get("/watch/:watch",function (req,res) {
+                database.collection("items").findOne({
+                    "createdAt":parseInt(req.params.watch)
+                },function (error,video) {
+                    if (video==null) {
+                        res.send("Product does not exist");
+                    } else {                         
+                            res.render("product",{
+                                "isLogin":req.session.user_id? true:false,
+                                "video":video, 
+                                  
+                            }); 
+                                                     
+                    }
+                });
             });
 
             app.listen(8080,()=>{

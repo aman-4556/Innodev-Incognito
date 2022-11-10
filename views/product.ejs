@@ -1,0 +1,54 @@
+<%- include("header") %>
+    <div class="video-container">
+        <div class="details">
+            <h1>
+                <%= video.title %>
+            </h1>
+            <p class="para-detail">
+                By <%= video.user.name %>
+            </p>
+            <p class="para-detail">
+                Posted on
+                <% var createdAt=new Date(video.createdAt); var date=createdAt.getDate()+""; %>
+                    <%= date.padStart(2,"0")+" " + months[createdAt.getMonth()]+" ,"+ createdAt.getFullYear() %>
+            </p>
+
+            
+            <input type="hidden" id="category" value="<%=video.category %> ">
+            <p class="para-detail">
+                <%=video.price %> MRP
+            </p>
+            <div>
+
+            </div>
+            <p class="text-center para-detail">
+                <b>Category:</b>
+                <%= video.category %>
+            </p>
+            <p class="para-detail">
+
+                <%= video.descriptions %>
+            </p>
+
+            <button type="submit" class="btn-success">Buy Now</button>
+             
+            <!-- <a href="/comment/<%#=video._id %> ">view comment</a> -->
+            
+
+        </div>
+        <!-- <div class="video"> <video id="videoPlayer" controls src="<%#=baseUrl+video.filePath%> "
+                poster="<%#=baseUrl+video.thumbnail %> "></video>
+        </div> -->
+        <!-- <form action="/comment" method="post">
+            <input type="hidden" name="videoId" id="videoId1" value="<%#=video._id %> ">
+            <input type="hidden" name="videowatch" id="videoId1" value="<%#=video.watch %> ">
+            <input type="text" name="comment" >
+            <button type="submit">comment</button>
+        </form> -->
+
+    </div>
+
+
+
+
+    <%- include("footer") %>

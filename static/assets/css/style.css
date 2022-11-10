@@ -1491,3 +1491,15 @@ section {
 #footer .credits a:hover {
   color: #f1f7ff;
 }
+/*  */
+.grid-three-col {
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 1rem;
+}
+
+.grid {
+  /* display: grid; */
+  display: grid;
+  gap: 0.5rem;
+  margin-left: 2vw;
+}
