@@ -201,6 +201,80 @@ MongoClient.connect("mongodb://localhost:27017/",{useNewUrlParser:true},
                 });
             });
 
+            app.get("/dashboard",(req,res)=>{
+               
+                database.collection("items").find({
+                 "user._id":ObjectId(req.session.user_id)
+                }).sort({
+                 "createdAt":-1
+                 }).toArray(function(error,videos){
+                      getUser(req.session.user_id,(user)=>{
+                         database.collection("photos").findOne({
+                             "user._id":ObjectId(req.session.user_id)
+                         },function (error,photo) {
+                             res.render("dashboard",{
+                                 "isLogin":req.session.user_id? true :false,
+                                 "user":user,
+                                 "videos":videos,
+                                 "photo":photo
+                             }) 
+                         })
+                         
+                     })
+                 
+              });
+         });
+
+         app.post("/delete",(req,res)=>{
+             database.collection("items").deleteOne({"_id":ObjectId(req.body.deleteId)});
+             res.redirect("/dashboard");
+         });
+
+
+         app.get("/editProfile",(req,res)=>{
+                
+            res.render("editProfile",{
+                "isLogin":true,
+
+            }); 
+        
+    })
+
+    app.post("/editProfile",(req,res)=>{
+        if (req.session.user_id) {
+            var formData=new formidable.IncomingForm();
+            formData.maxFileSize =1000*1024*1024;
+            formData.parse(req,(error,fields,files)=>{
+               
+                //var thumbnail=fields.thumbnail;
+                var oldPathcoverPhoto=files.coverPhoto.filepath;
+                var newPathcoverPhoto= "uploads/coverPhoto/"+ new Date().getTime()+"-"+files.coverPhoto.originalFilename;
+                fs.rename(oldPathcoverPhoto,newPathcoverPhoto,(error)=>{
+                    //
+                });
+                var oldPathimage=files.image.filepath;
+                var newPathimage= "uploads/image/"+ new Date().getTime()+"-"+files.image.originalFilename;
+                fs.rename(oldPathimage,newPathimage,(error)=>{
+                    getUser(req.session.user_id,(user)=>{
+                        var currentTime=new Date().getTime();
+                        database.collection("photos").insertOne({
+                            "user":{
+                                "_id":user._id,
+                                "name":user.name,
+                                "subscribers":user.subscribers
+                            },
+                            "coverPhoto":newPathcoverPhoto,
+                            "image":newPathimage
+                         });
+                         res.redirect("/");
+                    });    
+                });
+            })
+        }else{
+            res.redirect("/login");
+        }
+    })
+
             app.listen(8080,()=>{
                 console.log('listening at http://localhost:8080');
             });

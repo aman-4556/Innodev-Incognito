@@ -49,8 +49,10 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <% if(typeof isLogin !="undefined"&& isLogin){ %>
+          <li><a class="nav-link scrollto active" href="/dashboard">Your Profile</a></li>
+          <% } %> 
+          <li><a class="nav-link scrollto" href="/editProfile">Edit Profile</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
           <li><a class="nav-link scrollto " href="#portfolio">Products</a></li>
           <!-- <li><a class="nav-link scrollto" href="#team">Team</a></li> -->
@@ -108,48 +110,6 @@
   </section><!-- End Hero Section -->
 
   <main id="main">
-    <div class="top-recommended">
-      <h2 style="    margin-left: 31vw;
-            margin-bottom: 5vh;
-            text-decoration: underline;">Top-Recommended</h2>
-      <div class="grid grid-three-col">
-        <div class="new-card ">
-  
-          <% videos.forEach(function(video){ %>
-  
-            <img src="<%= video.thumbnail %>" class="video-show ">
-            <p style="    margin-left: 29px;
-            width: 100%;">
-            <div style="    display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 25vw;
-            margin-top: -14px;">
-            <div>
-              <%= video.title %> <br>
-              </div>
-            <div>
-              <%= video.price %> <br>
-              </div>
-              <div style=" margin-top: 12px;">
-              <a href="/watch/<%= video.createdAt %> " style="color: white;
-                 
-                background-color: #0d0dbd;
-                padding: 5px 19px;
-                border-radius: 7px;margin-top: 12px;">View</a>
-              </div>
-            </div>
-              <%# video.minutes +":"+ video.seconds %> 
-  
-             
-            </p>
-        </div>
-        
-  
-  
-          <% }) %>
-
     <% if(typeof isLogin =="undefined"|| !isLogin){ %>
     <!-- ======= About Section ======= -->
     <section id="about">
@@ -365,49 +325,9 @@
 
       </div>
     </section>
-    <% } %> <!-- End Why Us Section -->
+<!-- End Why Us Section -->
 
-    <div class="top-recommended">
-      <h2 style="    margin-left: 31vw;
-            margin-bottom: 5vh;
-            text-decoration: underline;">Top-Recommended</h2>
-      <div class="grid grid-three-col">
-        <div class="new-card ">
-  
-          <% videos.forEach(function(video){ %>
-  
-            <img src="<%= video.thumbnail %>" class="video-show ">
-            <p style="    margin-left: 29px;
-            width: 100%;">
-            <div style="    display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 25vw;
-            margin-top: -14px;">
-            <div>
-              <%= video.title %> <br>
-              </div>
-            <div>
-              <%= video.price %> <br>
-              </div>
-              <div style=" margin-top: 12px;">
-              <a href="/watch/<%= video.createdAt %> " style="color: white;
-                 
-                background-color: #0d0dbd;
-                padding: 5px 19px;
-                border-radius: 7px;margin-top: 12px;">View</a>
-              </div>
-            </div>
-              <%# video.minutes +":"+ video.seconds %> 
-  
-             
-            </p>
-        </div>
-        
-  
-  
-          <% }) %>
+    
     <!-- ======= Portfolio Section ======= -->
     <!-- <section id="portfolio" class="clearfix">
       <div class="container" data-aos="fade-up">
@@ -847,7 +767,48 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <% } %> 
+  <div class="top-recommended">
+    <h2 style="    margin-left: 31vw;
+          margin-bottom: 5vh;
+          text-decoration: underline;">Top-Recommended</h2>
+    <div class="grid grid-three-col">
+      <div class="new-card ">
 
+        <% videos.forEach(function(video){ %>
+
+          <img src="<%= video.thumbnail %>" class="video-show ">
+          <p style="    margin-left: 29px;
+          width: 100%;">
+          <div style="    display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 25vw;
+          margin-top: -14px;">
+          <div>
+            <%= video.title %> <br>
+            </div>
+          <div>
+            <%= video.price %> <br>
+            </div>
+            <div style=" margin-top: 12px;">
+            <a href="/watch/<%= video.createdAt %> " style="color: white;
+               
+              background-color: #0d0dbd;
+              padding: 5px 19px;
+              border-radius: 7px;margin-top: 12px;">View</a>
+            </div>
+          </div>
+            <%# video.minutes +":"+ video.seconds %> 
+
+           
+          </p>
+      </div>
+      <div>
+
+
+        <% }) %>
   <!-- Vendor JS Files -->
   <script src="/static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="/static/assets/vendor/aos/aos.js"></script>
