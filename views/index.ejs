@@ -108,6 +108,47 @@
   </section><!-- End Hero Section -->
 
   <main id="main">
+    <div class="top-recommended">
+      <h2 style="    margin-left: 31vw;
+            margin-bottom: 5vh;
+            text-decoration: underline;">Top-Recommended</h2>
+      <div class="grid grid-three-col">
+        <div class="new-card ">
+  
+          <% videos.forEach(function(video){ %>
+  
+            <img src="<%= video.thumbnail %>" class="video-show ">
+            <p style="    margin-left: 29px;
+            width: 100%;">
+            <div style="    display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 25vw;
+            margin-top: -14px;">
+            <div>
+              <%= video.title %> <br>
+              </div>
+            <div>
+              <%= video.price %> <br>
+              </div>
+              <div style=" margin-top: 12px;">
+              <a href="/watch/<%= video.createdAt %> " style="color: white;
+                 
+                background-color: #0d0dbd;
+                padding: 5px 19px;
+                border-radius: 7px;margin-top: 12px;">View</a>
+              </div>
+            </div>
+              <%# video.minutes +":"+ video.seconds %> 
+  
+             
+            </p>
+        </div>
+        
+  
+  
+          <% }) %>
 
     <% if(typeof isLogin =="undefined"|| !isLogin){ %>
     <!-- ======= About Section ======= -->
