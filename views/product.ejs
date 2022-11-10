@@ -1,6 +1,7 @@
 <%- include("header") %>
     <div class="video-container">
         <div class="details">
+            
             <h1>
                 <%= video.title %>
             </h1>
@@ -29,6 +30,7 @@
 
                 <%= video.descriptions %>
             </p>
+            <div class="video"><img src="<%=baseUrl+video.thumbnail %>" class="video "></div>
 
             <button type="submit" class="btn-success">Buy Now</button>
              
@@ -51,4 +53,4 @@
 
 
 
-    <%- include("footer") %>
+    
