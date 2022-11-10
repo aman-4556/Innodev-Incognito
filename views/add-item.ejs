@@ -1,25 +1,36 @@
-<%- include("header") %>
-<h1>Add our Items</h1>
+<body style="background-color: aqua;">
+<div class="container" style="
+position: absolute;
+    left: 33vw;
+    top: 23vh;
+    background-color: #744d4dad;
+    color: white;
+    padding-left: 38px;
+    border-radius: 22px;
+    align-items: center;">
+<h1>Add Items</h1>
 <form action="/add-item" method="post" enctype="multipart/form-data">
-    <label>Item-Image</label>
+    <label >Item-Image</label>
     <input type="file" name="thumbnail" accept="image/*" class="form-control-file" required> 
-    <div>
+    <div style="margin: 7px;"><br>
     <label>Title</label> 
    <input type="text" name="title" class="form-control" required>
-   </div>
-    <div>
+   </div><br>
+    <div style="margin: 7px;">
     <label>Price</label> 
    <input type="number" name="price" class="form-control" required>
    </div>
-   <label>Description</label>
-   <textarea name="description" class="form-control" cols="30" rows="5" required></textarea>
+   <label>Description</label><br>
+   <textarea name="description" class="form-control" cols="30" rows="5" required></textarea><br>
    <label>Category</label>
    <select name="category" class="form-control" required>
-       <option value="technology">Furniture</option>
-       <option value="gaming">Study material</option>
-       <option value="education">Basic Needs</option>
+       <option value="Furniture">Furniture</option>
+       <option value="Study material">Study material</option>
+       <option value="Basic Needs">Basic Needs</option>
        </select>
-   <button type="submit">Add</button>
+       <br>
+   <button type="submit"style="margin: 7px;" >Add</button>
 </form>
+</div>
 </body>
 </html>
