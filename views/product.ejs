@@ -1,6 +1,32 @@
-<%- include("header") %>
-    <div class="video-container">
-        <div class="details">
+<body style="background-color:#bdbd65">
+    <div class="video-container" style=" 
+        border-radius: 18px;
+        padding: 28px;
+        position: absolute;
+        display: flex;
+        top: 3vh;
+        left: 7vw;
+        width: 90vw;
+        background: url(../static/200.webp);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 82vh;
+
+    ">
+        <div class="details" style="
+               text-align: center;
+    position: absolute;
+    align-items: center;
+    top: 10vh;
+    left: 15vw;
+    background-color: #5b68bccf;
+    color: white;
+    padding: 47px;
+    border-radius: 15px;
+    width: 50vw;
+    
+        ">
             
             <h1>
                 <%= video.title %>
@@ -30,7 +56,9 @@
 
                 <%= video.descriptions %>
             </p>
-            <div class="video"><img src="<%=baseUrl+video.thumbnail %>" class="video "></div>
+  
+    <div class="video"><img src="<%=baseUrl+video.thumbnail %>" class="video " style="margin-bottom: 15px;
+        border-radius: 13px;"></div>
 
             <button type="submit" class="btn-success">Buy Now</button>
              
@@ -49,8 +77,3 @@
         </form> -->
 
     </div>
-
-
-
-
-    
